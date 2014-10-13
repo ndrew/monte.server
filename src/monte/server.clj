@@ -1,8 +1,15 @@
-(ns monte.server)
+(ns monte.server
+	(:require [monte.server.handler :as handler]))
 
 ;;
-;; api will go here
+;; api will be here
 ;;
 
 (defn foo[]
 	(println "Foo"))
+
+
+(defn ring-handler 
+	"generates a ring handler with monte support"
+	[& custom-routes]
+	(apply handler/gen-app-handler custom-routes))

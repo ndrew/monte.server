@@ -1,4 +1,6 @@
 (ns monte.server.handler
+  (:use ring.server.standalone
+        [ring.middleware file-info file])
   (:require [compojure.core :refer [defroutes]]
             [monte.server.routes :refer [monte-routes]]
             [monte.server.middleware :refer [load-middleware]]
@@ -12,7 +14,6 @@
             [selmer.parser :as parser]
             [environ.core :refer [env]]
             [cronj.core :as cronj]
-            [monte.server :as api]
             ))
 
 (defroutes base-routes
@@ -43,7 +44,7 @@
   (timbre/info "\n-=[ monte.server started successfully"
                (when (env :dev) "using the development profile") "]=-")
 
-  (api/foo )
+;;  (api/foo)
 
   )
 
@@ -55,10 +56,12 @@
   (cronj/shutdown! session-manager/cleanup-job)
   (timbre/info "shutdown complete!"))
 
+
 ;; timeout sessions after 30 minutes
 (def session-defaults
   {:timeout (* 60 30)
    :timeout-response (redirect "/")})
+
 
 (defn- mk-defaults
        "set to true to enable XSS protection"
@@ -68,9 +71,17 @@
            (assoc-in [:security :xss-protection :enable?] xss-protection?)
            (assoc-in [:security :anti-forgery] xss-protection?)))
 
-(def app (app-handler
+
+(defn gen-app-handler[& custom-routes]
+  (println custom-routes)
+  (app-handler
            ;; add your application routes here
-           [monte-routes base-routes]
+           (if custom-routes
+            (into (if (vector? custom-routes)
+                           custom-routes
+                           (vec custom-routes)) [monte-routes base-routes])
+            [monte-routes base-routes])
+           
            ;; add custom middleware here
            :middleware (load-middleware)
            :ring-defaults (mk-defaults false)
@@ -80,3 +91,39 @@
            ;; available formats:
            ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
            :formats [:json-kw :edn :transit-json]))
+
+(def app (gen-app-handler))
+
+;; from repl
+
+(comment 
+(defonce server (atom nil))
+
+(defn get-handler []
+  ;; #'app expands to (var app) so that when we reload our code,
+  ;; the server is forced to re-resolve the symbol in the var
+  ;; rather than having its own copy. When the root binding
+  ;; changes, the server picks it up without having to restart.
+  (-> #'app
+      ; Makes static assets in $PROJECT_DIR/resources/public/ available.
+      (wrap-file "resources")
+      ; Content-Type, Content-Length, and Last Modified headers for files in body
+      (wrap-file-info)))
+
+(defn start-server
+  "used for starting the server in development mode from REPL"
+  [& [port]]
+  (let [port (if port (Integer/parseInt port) 3000)]
+    (reset! server
+            (serve (get-handler)
+                   {:port port
+                    :init init
+                    :auto-reload? true
+                    :destroy destroy
+                    :join? false}))
+    (println (str "You can view the site at http://localhost:" port))))
+
+(defn stop-server []
+  (.stop @server)
+  (reset! server nil))
+)

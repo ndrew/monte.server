@@ -51,6 +51,6 @@
                  [monte "0.0.2"]
 
                  ]
-  :repl-options {:init-ns monte.server.repl}
+  ;:repl-options {:init-ns monte.server.repl}
 
   :min-lein-version "2.0.0")
