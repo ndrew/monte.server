@@ -1,6 +1,6 @@
 (ns monte.server.handler
   (:require [compojure.core :refer [defroutes]]
-            [monte.server.routes.home :refer [home-routes]]
+            [monte.server.routes :refer [monte-routes]]
             [monte.server.middleware :refer [load-middleware]]
             [monte.server.session-manager :as session-manager]
             [noir.response :refer [redirect]]
@@ -11,7 +11,9 @@
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
             [environ.core :refer [env]]
-            [cronj.core :as cronj]))
+            [cronj.core :as cronj]
+            [monte.server :as api]
+            ))
 
 (defroutes base-routes
   (route/resources "/")
@@ -39,7 +41,11 @@
   ;;start the expired session cleanup job
   (cronj/start! session-manager/cleanup-job)
   (timbre/info "\n-=[ monte.server started successfully"
-               (when (env :dev) "using the development profile") "]=-"))
+               (when (env :dev) "using the development profile") "]=-")
+
+  (api/foo )
+
+  )
 
 (defn destroy
   "destroy will be called when your application
@@ -64,7 +70,7 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [home-routes base-routes]
+           [monte-routes base-routes]
            ;; add custom middleware here
            :middleware (load-middleware)
            :ring-defaults (mk-defaults false)

@@ -46,6 +46,11 @@
                  [environ "1.0.0"]
                  [ring-server "0.3.1"]
                  [secretary "1.2.1"]
-                 [im.chit/cronj "1.4.2"]]
+                 [im.chit/cronj "1.4.2"]
+                ;; 
+                 [monte "0.0.2"]
+
+                 ]
   :repl-options {:init-ns monte.server.repl}
+
   :min-lein-version "2.0.0")

@@ -1,4 +1,4 @@
-(ns monte.server.routes.home
+(ns monte.server.routes
             (:require [monte.server.layout :as layout]
                       [monte.server.util :as util]
                       [compojure.core :refer :all]
@@ -13,7 +13,7 @@
       (pprint doc)
       {:status "ok"})
 
-(defroutes home-routes
+(defroutes monte-routes
   (GET "/" [] (home-page))
   (POST "/save" {:keys [body-params]}
     (edn (save-document body-params))))
