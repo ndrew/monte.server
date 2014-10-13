@@ -8,4 +8,4 @@ pom.xml
 /.lein-*
 /.env
 *.log
-/target/resourses/public/js
+/resources/public/js
