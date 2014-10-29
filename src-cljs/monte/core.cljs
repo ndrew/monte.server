@@ -5,6 +5,10 @@
                       [reagent-forms.core :refer [bind-fields]]
                       [ajax.core :refer [POST]]))
 
+(.log js/console "monte!")
+
+
+(comment 
 (def state (atom {:saved? false}))
 
 (defn row [label & body]
@@ -83,3 +87,4 @@
 ;;start the app
 (init!)
 
+)

@@ -48,7 +48,7 @@
                  [secretary "1.2.1"]
                  [im.chit/cronj "1.4.2"]
                 ;; 
-                 [monte "0.0.2"]
+                 [monte "0.0.3"]
 
                  ]
   ;:repl-options {:init-ns monte.server.repl}

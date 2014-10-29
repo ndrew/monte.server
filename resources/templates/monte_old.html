@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="description" content="Monte: visualization tool">
+      <meta name="author"      content="Andrew Sernyak">      
+     
+      <title>Monte</title>
+      <link rel="shortcut icon" href="/css/favicon.ico" type="image/x-icon">
+    
+       <link rel="stylesheet" href="/css/monte.css">
+<!--      (include-css "/css/monte.css")
+     (include-js "/extern/jquery-1.7.2.min.js")
+     (include-js "/extern/moment.min.js")
+     (include-js "/extern/d3.js")
+     
+     
+     (include-edn edn-storage-jsvar {:view (:view-id cfg :index-page) 
+                                     :update-url (:update-url cfg)
+                                     :cfg data})
+-->
+
+  </head>
+  <body>
+    <a id="logo" href="/"></a>
+    <div id="settings"> 
+      <a href="/status/">status</a>&nbsp;
+      <a href="/settings/">settings</a>
+    </div>
+    <div id="viewport">
+    
+    <!-- landing page -->
+    <!--<article id="intro">
+      <h1 class="proj-name">Monte</h1>
+      <a href="/settings" style="float: right; display: inline;">Settings</a>
+      <p>Please open existing project, or create a new one
+          <span class="hint">(?)</span></p>
+
+      <ul class="projects">
+        <li class="new"> 
+             <a href="#">add new</a>
+        </li></ul>
+    </article>-->
+
+    <!-- project page -->
+
+    <!--<article id="project">
+      <div class="status">STATUS HERE</div>
+      <nav 
+        <h1 class="proj-name"> "Opening..."</h1>
+        <h2 class="view-nav">
+           &nbsp;1. <a href="#" id="miner">Miners</a> 
+           &nbsp;2. <a href="#" id="refine">Refine data</a>
+           &nbsp;3. <a href="#" id="visualization">Visualization</a>
+        </h2>
+      </nav>
+      <div class="actions">
+        <button id="run_miners">Run miners</button>
+        <button id="redraw">Redraw"</button>
+      </div>
+
+      <div id="miner_view" class="view">
+            <p>Please select and configure miners. 
+            <span class="hint">(?)</span></p>
+            
+            <div class="list">
+                  <h4>"Miners"</h4>
+                  <table id="miner_table">
+                         <tr> 
+                            <td class="new" colspan="3">
+                                <a href="#" id="new_miner">add new</a></td></tr></table></div>
+
+            <div class="list">
+                  <h4>"Variables"</h4>
+                  <table id="var_table">
+                        <tr>
+                         <td class="new" colspan="3">
+                                   <a href="#" id="new_var">add new</a></td></tr></table></div>
+      </div>
+      
+    
+    
+      <div id="refine_view" class="view"> 
+            <p>Connect the data sets from miners. " 
+            <span class="hint">(?)</span></p>
+            
+            <div class="list">
+                  <h4>Entities</h4>
+                  <table id="entities_table">
+                         <tr> <td class="new" colspan="3">
+                                   <a href="#" id="new_miner">add new</a></td></tr></table></div>
+
+            <div class="list">
+                  <h4>"Connections"</h4>
+                  <table id="connections_table">
+                         <tr> <td class="new" colspan="3">
+                                   <a href="#" id="new_miner">add new</a></td></tr></table></div>
+
+                        
+            </div>
+      
+      
+      <div id="visualization_view" class="view">
+            <div>  
+              <label>Query: </label>
+              <input type="text" class="filter_box">
+              <span class "hint">(?)</span></div>
+            <div>
+              <div id="legend">
+                 <div class="list" style="display: block; width: 100%;">
+                   <h4>Legend</h4>
+                   <table id="legend_table"> 
+                   <tbody></tbody></table></div></div>
+              <div id="canvas"></div>
+            </div>
+        </div>
+
+    </div>
+    </article>-->
+
+    <h1>Settings</h1>
+    <div class="list">
+        <h4>Workspace</h4>
+        <table id="workspace_table" class=""></table>
+    </div>      
+
+    <div id="debug">debug</div>
+  </body>
+</html>
+

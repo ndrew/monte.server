@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Monte!</title>
+      <link rel="shortcut icon" href="/css/favicon.ico" type="image/x-icon">
+
+  </head>
+  <body>
+    {% style "/css/screen.css" %}
+
+    <script type="text/javascript">
+        var context = "{{servlet-context}}";
+    </script>
+    {% if dev %}
+      {% script "/js/goog/base.js" %}
+      {% script "/js/app.js" %}
+      <script type="text/javascript">goog.require("monte.server.core");</script>
+    {% else %}
+      {% script "/js/app.js" %}
+    {% endif %}
+  </body>
+</html>
