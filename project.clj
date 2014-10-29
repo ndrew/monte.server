@@ -1,6 +1,9 @@
 (defproject monte.server
   "0.0.1"
-  :description "FIXME: write description"
+  :description "monte.server is a server with monte library wrapped"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+
   :ring {:handler monte.server.handler/app,
          :init monte.server.handler/init,
          :destroy monte.server.handler/destroy}
